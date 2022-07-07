@@ -14,3 +14,6 @@ My University Of Liverpool Master Thesis Code
 - https://www.xglobalmarkets.com/learn_center/japanese-candlestick-basics/: Close Price, Upper Shadow, Lower Shadow & Real-Body (CURL)
 - https://github.com/matplotlib/mplfinance (plot candlesticks)
 - https://github.com/matplotlib/mplfinance/blob/master/examples/addplot.ipynb (add custom plot to mplfinance)
+- https://towardsdatascience.com/a-visual-guide-to-multidimensional-numpy-array-aggregation-97a8960b3c59 (numpy array)
+- https://machinelearningmastery.com/a-gentle-introduction-to-channels-first-and-channels-last-image-formats-for-deep-learning/ (image channel order)
+- https://numpy.org/doc/stable/reference/generated/numpy.save.html (save numpy object)
