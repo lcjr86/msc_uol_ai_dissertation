@@ -17,3 +17,5 @@ My University Of Liverpool Master Thesis Code
 - https://towardsdatascience.com/a-visual-guide-to-multidimensional-numpy-array-aggregation-97a8960b3c59 (numpy array)
 - https://machinelearningmastery.com/a-gentle-introduction-to-channels-first-and-channels-last-image-formats-for-deep-learning/ (image channel order)
 - https://numpy.org/doc/stable/reference/generated/numpy.save.html (save numpy object)
+- https://github.com/mohantyaditya/Datagenerator/blob/master/model.py (Keras Datagenerator)
+- https://github.com/RainBoltz/Series2GAF (GAF)
