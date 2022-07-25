@@ -19,3 +19,4 @@ My University Of Liverpool Master Thesis Code
 - https://numpy.org/doc/stable/reference/generated/numpy.save.html (save numpy object)
 - https://github.com/mohantyaditya/Datagenerator/blob/master/model.py (Keras Datagenerator)
 - https://github.com/RainBoltz/Series2GAF (GAF)
+- https://www.geeksforgeeks.org/python-image-classification-using-keras/ (image classification using Keras)
