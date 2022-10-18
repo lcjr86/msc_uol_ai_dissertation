@@ -1,6 +1,8 @@
 from re import L
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+from sklearn import preprocessing
+from statsmodels.tsa.api import SimpleExpSmoothing
 import math
 import numpy as np
 import logging
@@ -18,6 +20,20 @@ logger.setLevel(logging.DEBUG)
 
 # def test_log():
 #     logger.info("test")
+
+def reverse_list(lst):
+    try:
+        reversed_lst = []
+        
+        # iterate to reverse the list
+        for i in lst:
+            # reversing the list
+            reversed_lst.insert(0, i)
+        
+        return reversed_lst
+
+    except Exception as e:
+        logger.error("Exception occurred", exc_info=True)
 
 def check_candlestick_color(df_ohlc):
     try:
@@ -123,6 +139,49 @@ def check_trend(df, event_date, window_size, slope_size):
             return sign_recent_slope_coef
         else:
             return 0
+
+    except Exception as e:
+        logger.error("Exception occurred", exc_info=True)
+
+def check_intensity_trend(df, event_date, window_size, slope_size):
+    '''
+        Input: 
+            Dataframe with the reference dates (index) + OHLC with the 'potential' date of the signal in the end (last observed data);
+            window_size: How many datapoints will be used (total window)
+            slope_size: How many datapoints will be used on each slope
+            Ex: 
+                Reference_dates: [D-n, ..., D-3, D-2, D-1, D0]
+        Output:
+            the intensity
+    '''    
+    try:
+        #get the location of the event_date
+        idx = df.index.get_loc(event_date)
+
+        #get the data from that interval
+        df_temp = df.iloc[idx - window_size:idx + 1]
+
+        list_coeficients = []
+        for i in range(window_size, slope_size - 1, -1):
+            df_slope_temp = df_temp[['open_time', 'close']].iloc[i-slope_size:i]
+            x = df_slope_temp.open_time.values.reshape((-1,1))
+            y = df_slope_temp.close.values
+            model = LinearRegression()
+            model.fit(x, y)
+            list_coeficients.append(model.coef_[0])
+
+        reversed_list_coeficients = reverse_list(list_coeficients)
+
+        fit_SES_0dot2 = SimpleExpSmoothing(reversed_list_coeficients, initialization_method="heuristic").fit(smoothing_level=0.2, optimized=False)
+
+        list_temp = np.array(fit_SES_0dot2.fittedvalues.tolist()).reshape(-1,1)
+        scaler = preprocessing.MaxAbsScaler()
+        normalizedlist=scaler.fit_transform(list_temp)
+        reversed_list_coeficients_scaled = normalizedlist.reshape(1,-1)[0].tolist()
+
+        intensity_index = sum(reversed_list_coeficients_scaled) / len(reversed_list_coeficients_scaled)
+
+        return intensity_index
 
     except Exception as e:
         logger.error("Exception occurred", exc_info=True)
