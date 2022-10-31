@@ -20,3 +20,4 @@ My University Of Liverpool Master Thesis Code
 - https://github.com/mohantyaditya/Datagenerator/blob/master/model.py (Keras Datagenerator)
 - https://github.com/RainBoltz/Series2GAF (GAF)
 - https://www.geeksforgeeks.org/python-image-classification-using-keras/ (image classification using Keras)
+- https://towardsdatascience.com/simple-exponential-smoothing-749fc5631bed (Simple Exponential Smoothing)
