@@ -4,8 +4,8 @@ My University Of Liverpool Master Thesis Code
 ## Data
 
 ### Training perdiod
-- from 01/01/2020 to 31/12/2021
-- Timestamp: 1MIN
+- from 01/01/2021 to 31/12/2022
+- Timestamp: 15MIN
 - Data volume: 
 
 ## References
