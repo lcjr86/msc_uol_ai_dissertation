@@ -4,6 +4,10 @@
 # Data
 data/*
 
+simulations/notebooks/tensorboard/*
+simulations/save_models_components/*
+simulations/results/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
