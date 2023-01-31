@@ -29,7 +29,7 @@ logger = logging.getLogger()
 configur = ConfigParser()
 configur.read('../config_files/config_candlestick_patterns.ini')
 
-def create_candlestick_patterns(list_asset_ticket, list_timestamp, db_address, start_date="", end_date=""):
+def create_candlestick_patterns(list_asset_ticket, list_timestamp, db_address, now_flag, start_date="", end_date=""):
     try:
         logger.info("start")
 
@@ -57,7 +57,14 @@ def create_candlestick_patterns(list_asset_ticket, list_timestamp, db_address, s
                 if(start_date!="" and end_date!=""):
                     
                     sd = datetime.datetime.strptime(start_date,'%d %b, %Y').strftime('%Y-%m-%d')
-                    ed = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
+                
+                    if(now_flag):
+                        ed_temp = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
+                        ed_dt = datetime.datetime.strptime(ed_temp,'%Y-%m-%d')
+                        ed_dt = ed_dt + datetime.timedelta(days=1)
+                        ed = ed_dt.strftime('%Y-%m-%d')                    
+                    else:
+                        ed = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
 
                     sql_append = " WHERE " + "date(date) >= " + "'" + sd + "'" + " AND date(date) <= " + "'" + ed + "'"
                     sql_command = sql_command + sql_append
@@ -116,7 +123,7 @@ def create_candlestick_patterns(list_asset_ticket, list_timestamp, db_address, s
     except Exception as e:
         logger.error(e)
 
-def validate_candlesitck_patterns(list_asset_ticket, list_timestamp, db_address, start_date="", end_date=""):
+def validate_candlesitck_patterns(list_asset_ticket, list_timestamp, db_address, now_flag, start_date="", end_date=""):
     try:
         for asset_ticket in list_asset_ticket:
             for timestamp in list_timestamp:
@@ -131,7 +138,14 @@ def validate_candlesitck_patterns(list_asset_ticket, list_timestamp, db_address,
                 if(start_date!="" and end_date!=""):
                     
                     sd = datetime.datetime.strptime(start_date,'%d %b, %Y').strftime('%Y-%m-%d')
-                    ed = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
+
+                    if(now_flag):
+                        ed_temp = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
+                        ed_dt = datetime.datetime.strptime(ed_temp,'%Y-%m-%d')
+                        ed_dt = ed_dt + datetime.timedelta(days=1)
+                        ed = ed_dt.strftime('%Y-%m-%d')
+                    else:
+                        ed = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')                    
 
                     sql_append = " WHERE " + "date(date) >= " + "'" + sd + "'" + " AND date(date) <= " + "'" + ed + "'"
                     sql_command = sql_command + sql_append
@@ -411,7 +425,7 @@ def create_technical_indicators_df(df_price_ohcl):
     except Exception as e:
         logger.error(e)
 
-def create_risk_and_technical_indicators(list_asset_ticket, list_timestamp, db_address, start_date="", end_date=""):
+def create_risk_and_technical_indicators(list_asset_ticket, list_timestamp, db_address, now_flag, start_date="", end_date=""):
     try:
         for asset_ticket in list_asset_ticket:
             for timestamp in list_timestamp:
@@ -429,7 +443,14 @@ def create_risk_and_technical_indicators(list_asset_ticket, list_timestamp, db_a
                     sd_dt = datetime.datetime.strptime(sd_temp,'%Y-%m-%d')
                     sd_dt = sd_dt + datetime.timedelta(days=-180)
                     sd = sd_dt.strftime('%Y-%m-%d')
-                    ed = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
+
+                    if(now_flag):
+                        ed_temp = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
+                        ed_dt = datetime.datetime.strptime(ed_temp,'%Y-%m-%d')
+                        ed_dt = ed_dt + datetime.timedelta(days=1)
+                        ed = ed_dt.strftime('%Y-%m-%d')
+                    else:
+                        ed = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')                        
 
                     sql_append = " WHERE " + "date(date) >= " + "'" + sd + "'" + " AND date(date) <= " + "'" + ed + "'"
                     sql_command = sql_command + sql_append
@@ -465,7 +486,7 @@ def create_risk_and_technical_indicators(list_asset_ticket, list_timestamp, db_a
     except Exception as e:
         logger.error(e)
 
-def create_crypto_index(list_asset_ticket, list_timestamp, db_address, start_date="", end_date=""):
+def create_crypto_index(list_asset_ticket, list_timestamp, db_address, now_flag, start_date="", end_date=""):
     try:
         for asset_ticket in list_asset_ticket:
             for timestamp in list_timestamp:
@@ -483,7 +504,14 @@ def create_crypto_index(list_asset_ticket, list_timestamp, db_address, start_dat
                     sd_dt = datetime.datetime.strptime(sd_temp,'%Y-%m-%d')
                     sd_dt = sd_dt + datetime.timedelta(days=-10)
                     sd = sd_dt.strftime('%Y-%m-%d')
-                    ed = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
+
+                    if(now_flag):
+                        ed_temp = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')
+                        ed_dt = datetime.datetime.strptime(ed_temp,'%Y-%m-%d')
+                        ed_dt = ed_dt + datetime.timedelta(days=1)
+                        ed = ed_dt.strftime('%Y-%m-%d')
+                    else:
+                        ed = datetime.datetime.strptime(end_date,'%d %b, %Y').strftime('%Y-%m-%d')                        
 
                     sql_append = " WHERE " + "date(date) >= " + "'" + sd + "'" + " AND date(date) <= " + "'" + ed + "'"
                     sql_command = sql_command + sql_append

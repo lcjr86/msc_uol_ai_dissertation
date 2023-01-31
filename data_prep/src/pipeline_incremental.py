@@ -31,26 +31,27 @@ def main():
     db_address = 'sqlite:///../../data/db/crypto.db'
 
     start_date = "23 Jan, 2023"
-    end_date = "30 Jan, 2023"
+    end_date = "31 Jan, 2023"
+    now_flag = True
 
     logger.info("start ufe.get_raw_period_date_data_binance")
-    uidb.get_raw_period_date_data_binance(list_asset_ticket, list_timestamp, db_address, start_date, end_date)
+    uidb.get_raw_period_date_data_binance(list_asset_ticket, list_timestamp, db_address, now_flag, start_date, end_date)
     logger.info("end ufe.get_raw_period_date_data_binance")    
 
     logger.info("start ufe.get_candlestick_patterns")
-    ufe.create_candlestick_patterns(list_asset_ticket, list_timestamp, db_address, start_date, end_date)
+    ufe.create_candlestick_patterns(list_asset_ticket, list_timestamp, db_address, now_flag, start_date, end_date)
     logger.info("end ufe.get_candlestick_patterns")
 
     logger.info("start ufe.validate_candlesitck_patterns")
-    ufe.validate_candlesitck_patterns(list_asset_ticket, list_timestamp, db_address, start_date, end_date)
+    ufe.validate_candlesitck_patterns(list_asset_ticket, list_timestamp, db_address, now_flag, start_date, end_date)
     logger.info("end ufe.validate_candlesitck_patterns")
 
     logger.info("start ufe.create_risk_and_technical_indicators")
-    ufe.create_risk_and_technical_indicators(list_asset_ticket, list_timestamp, db_address, start_date, end_date)
+    ufe.create_risk_and_technical_indicators(list_asset_ticket, list_timestamp, db_address, now_flag, start_date, end_date)
     logger.info("end ufe.create_risk_and_technical_indicators")
 
     logger.info("start ufe.create_crypto_index")
-    ufe.create_crypto_index(list_asset_ticket, list_timestamp, db_address, start_date, end_date)
+    ufe.create_crypto_index(list_asset_ticket, list_timestamp, db_address, now_flag, start_date, end_date)
     logger.info("end ufe.create_crypto_index")
 
 # Using the special variable 

@@ -21,7 +21,7 @@ logging.basicConfig(filename="logs/utils_import_data_binance.log",
 # Creating an object
 logger = logging.getLogger()
 
-def get_raw_period_date_data_binance(list_asset_ticket, list_timestamp, db_address, start_date, end_date):
+def get_raw_period_date_data_binance(list_asset_ticket, list_timestamp, db_address, now_flag, start_date, end_date):
     try:
 
         load_dotenv(dotenv_path='../config_files/.env')
@@ -36,7 +36,10 @@ def get_raw_period_date_data_binance(list_asset_ticket, list_timestamp, db_addre
                 logger.info(f'timestamp:{timestamp}')
 
                 # Get the data
-                klines = client.get_historical_klines(asset_ticket, timestamp, start_date, end_date)
+                if(now_flag):
+                    klines = client.get_historical_klines(asset_ticket, timestamp, start_date)
+                else:
+                    klines = client.get_historical_klines(asset_ticket, timestamp, start_date, end_date)
                 logger.info("Get data from API completed")
 
                 # Convert list of lists to pandas df
