@@ -31,7 +31,7 @@ def main():
     db_address = 'sqlite:///../../data/db/crypto.db'
 
     start_date = "31 Jan, 2023"
-    end_date = "06 Feb, 2023"
+    end_date = "13 Feb, 2023"
     now_flag = True
 
     logger.info("start ufe.get_raw_period_date_data_binance")
